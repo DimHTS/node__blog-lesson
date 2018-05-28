@@ -1,3 +1,6 @@
+import jwt from 'jsonwebtoken'
+
+import config from '../config'
 import User from '../models/user'
 
 
@@ -40,6 +43,6 @@ export const signin = async (req, res, next) => {
     })
   }
 
-  req.session.userId = user._id;
-  res.json(user);
+  const token = jwt.sign({ _id: user._id }, config.secret)
+  res.json(token);
 }
