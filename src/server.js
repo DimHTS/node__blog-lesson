@@ -7,6 +7,7 @@ import bluebird from 'bluebird'
 
 import config from './config'
 import authRoute from './routes/auth'
+import userRoute from './routes/user'
 import errorHandler from './middlewares/errorHandler'
 import checkToken from './middlewares/checkToken'
 
@@ -26,7 +27,7 @@ app.listen(config.port, err => {
 })
 
 
-app.use(morgan('combined'))
+app.use(morgan('tiny'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(session({
@@ -41,6 +42,7 @@ app.use(session({
 // })
 
 app.use('/api', authRoute);
+app.use('/api', checkToken, userRoute);
 app.get('/test', checkToken, (req, res) => {
   res.json('test')
 });
