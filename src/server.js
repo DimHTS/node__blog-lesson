@@ -16,7 +16,7 @@ import checkToken from './middlewares/checkToken'
 const app = express()
 
 mongoose.Promise = bluebird;
-mongoose.connect("mongodb://localhost:27017/" + config.database, err => {
+mongoose.connect(config.database, err => {
   if (err) throw err;
 
   console.log('Mongo connected')
