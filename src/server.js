@@ -22,7 +22,7 @@ mongoose.connect(config.database, err => {
   console.log('Mongo connected')
 })
 
-app.listen(config.port, err => {
+app.listen(process.env.PORT || config.port, err => {
   if (err) throw err;
 
   console.log('Server listening on port: ' + config.port)
